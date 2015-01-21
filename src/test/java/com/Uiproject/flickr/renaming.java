@@ -19,7 +19,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.Uiproject.flickr.APIprop;
 
-
 public class renaming {
 	public static void main(String[] args) {
 		WebDriver driver;
@@ -54,21 +53,24 @@ public class renaming {
 				.click();
 		List<WebElement> resultList = driver
 				.findElements(By
-						.xpath(".//html/body/div/div[3]/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[1]"));
+						.xpath("//div[@id='content']/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[1]"));
 		for (WebElement resultItem : resultList) {
-			String tabname = resultItem.getText();
-			System.out.println(tabname);
-		}
+			String airline = resultItem.getText();
+			System.out.println(airline);
 
-		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+		}
+		List<WebElement> resultList1 = driver
+				.findElements(By
+						.xpath("//div[@id='content']/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[2]"));
+		for (WebElement resultItem1 : resultList1) {
+			String model = resultItem1.getText();
+
+			System.out.println(model);
+		}
 		driver.quit();
 
 	}
 }
-
-// driver.findElement(By.cssSelector("img[alt=\"Click here for full size photo!\"]")).click();
-// driver.findElement(By.xpath("//html/body/div[1]/div[3]/div/table[1]/tbody/tr[2]/td[2]/div[3]/table[2]/tbody/tr/td/table/tbody/tr[2]/td[1]/table/tbody/tr/td/font/a[1]"));
-// driver.findElement(By.xpath("(//html/body/div[1]/div[3]/div/table[1]/tbody/tr[2]/td[2]/div[3]/table[2]/tbody/tr/td/table/tbody/tr[2]/td[1]/table/tbody/tr/td/
 
 // Done! Here's the API key and secret for your new app:
 // my app
@@ -77,4 +79,10 @@ public class renaming {
 // 86d9143b3942339fba26947499608870
 //
 // Secret:
-// 75ed9c6d7095f621 
+// 75ed9c6d7095f621
+
+// airline:
+// /html/body/div[1]/div[3]/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[1]
+// model:
+// /html/body/div[1]/div[3]/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[2]
+

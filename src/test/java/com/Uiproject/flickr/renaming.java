@@ -17,8 +17,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.Uiproject.flickr.APIprop;
-
 public class renaming {
 	public static void main(String[] args) {
 		WebDriver driver;
@@ -67,9 +65,9 @@ public class renaming {
 
 			System.out.println(model);
 		}
-		driver.quit();
-
+		driver.quit(); 	
 	}
+    
 }
 
 // Done! Here's the API key and secret for your new app:

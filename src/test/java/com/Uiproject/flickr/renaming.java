@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,6 +23,10 @@ public class renaming {
 		WebDriver driver;
 		String baseUrl;
 		Client client;
+		String title;
+		long photoId;
+		String airline = null;
+		String model = null;
 		client = ClientBuilder.newClient();
 		String FlickrUrl = APIprop.flickrurl;
 		Invocation.Builder invocationBuilder = client.target(FlickrUrl)
@@ -33,7 +38,8 @@ public class renaming {
 				.getJSONObject("rsp").getJSONObject("photos")
 				.getJSONObject("photo");
 
-		String title = jsonresponse.getString("title");
+		title = jsonresponse.getString("title");
+		photoId = jsonresponse.getLong("id");
 
 		driver = new FirefoxDriver();
 		baseUrl = "http://www.airliners.net";
@@ -53,7 +59,7 @@ public class renaming {
 				.findElements(By
 						.xpath("//div[@id='content']/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[1]"));
 		for (WebElement resultItem : resultList) {
-			String airline = resultItem.getText();
+			airline = resultItem.getText();
 			System.out.println(airline);
 
 		}
@@ -61,12 +67,25 @@ public class renaming {
 				.findElements(By
 						.xpath("//div[@id='content']/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[2]"));
 		for (WebElement resultItem1 : resultList1) {
-			String model = resultItem1.getText();
-
+			model = resultItem1.getText();
 			System.out.println(model);
 		}
 		driver.quit(); 	
+		System.out.println(airline+ " | "+model + " | "+ title +" "+ photoId);
+		String id = String.valueOf(photoId);
+		airline = airline.replace(' ', '+');
+		model = model.replace(' ', '+');
+		String newTitle = airline+ "+%7C+"+model+"+%7C+"+title;
+		String updateMetaUrl = APIprop.updateMeta.replaceFirst("PHOTO", id).replaceFirst("TITLE", newTitle);
+		System.out.println(updateMetaUrl);
+		
+		Invocation.Builder invocationBuilder1 = client.target(updateMetaUrl)
+				.request(MediaType.APPLICATION_JSON);
+		Response response1 = invocationBuilder1.post(Entity.json(""));
+		System.out.println(response1);
+		
 	}
+	
     
 }
 
@@ -79,8 +98,7 @@ public class renaming {
 // Secret:
 // 75ed9c6d7095f621
 
-// airline:
-// /html/body/div[1]/div[3]/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[1]
-// model:
-// /html/body/div[1]/div[3]/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[2]
 
+	
+	
+	

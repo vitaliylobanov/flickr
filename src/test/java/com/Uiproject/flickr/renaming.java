@@ -81,7 +81,7 @@ public class renaming {
 		
 		Invocation.Builder invocationBuilder1 = client.target(updateMetaUrl)
 				.request(MediaType.APPLICATION_JSON);
-		Response response1 = invocationBuilder1.post(Entity.json(""));
+		Response response1 = invocationBuilder1.put(Entity.json(""));
 		System.out.println(response1);
 		
 	}

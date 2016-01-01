@@ -1,7 +1,13 @@
 package com.Uiproject.flickr;
 
  
-import java.util.Scanner; 
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 import com.github.scribejava.core.builder.ServiceBuilder; 
 import com.github.scribejava.apis.FlickrApi; 
 import com.github.scribejava.core.model.OAuthRequest; 
@@ -21,6 +27,8 @@ public class Get_Access_Token {
         // Replace these with your own api key and secret 
          String apiKey = "86d9143b3942339fba26947499608870"; 
          String apiSecret = "75ed9c6d7095f621"; 
+         String permsWrite = "&perms=write";
+         String verificationCode;
          OAuthService service = new ServiceBuilder().provider(FlickrApi.class).apiKey(apiKey).apiSecret(apiSecret). 
                  build(); 
          Scanner in = new Scanner(System.in); 
@@ -42,6 +50,24 @@ public class Get_Access_Token {
          System.out.println(authorizationUrl + "&perms=write"); 
          System.out.println("And paste the verifier here");
         
+//         WebDriver driver;
+//         String baseUrl;
+//         driver = new FirefoxDriver();
+//         baseUrl = authorizationUrl + permsWrite;
+//         
+//         System.out.println(baseUrl);
+//         
+//         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//
+//         driver.get(baseUrl + "/");
+//         driver.findElement(By.cssSelector("input.Butt")).click();
+//         driver.findElement(By.xpath("//input[@id='yui_3_11_0_1_1451587841573_333']")).click();
+//         driver.findElement(By.xpath("//span[@id='yui_3_11_0_1_1451587884161_315']")).click();
+//         verificationCode = driver.findElement(By.xpath("//span[@id='yui_3_11_0_1_1451587884161_315']")).getText();
+         
+//         System.out.println(verificationCode);
+         
+         
          System.out.print(">>"); 
          Verifier verifier = new Verifier(in.nextLine()); 
          System.out.println(); 
@@ -54,17 +80,10 @@ public class Get_Access_Token {
          System.out.println("(if your curious it looks like this: " + accessToken + " )"); 
          System.out.println(); 
  
+        
+         
  
-         // Now let's go and ask for a protected resource! 
-//         System.out.println("Now we're going to access a protected resource..."); 
-//         OAuthRequest request = new OAuthRequest(Verb.GET, PROTECTED_RESOURCE_URL, service); 
-//         request.addQuerystringParameter("method", "flickr.test.login"); 
-//         service.signRequest(accessToken, request); 
-//         Response response = request.send(); 
-//         System.out.println("Got it! Lets see what we found..."); 
-//         System.out.println(); 
-//         System.out.println(response.getBody()); 
- 
+         // Now let's go and ask for a protected resource!  
          System.out.println("Now we're going to access a protected resource..."); 
          OAuthRequest request = new OAuthRequest(Verb.POST, PROTECTED_RESOURCE_URL, service); 
          request.addQuerystringParameter("method", "flickr.photos.setMeta");
@@ -73,7 +92,7 @@ public class Get_Access_Token {
          service.signRequest(accessToken, request); 
          Response response = request.send(); 
          System.out.println("Got it! Lets see what we found..."); 
-         System.out.println(request); 
+         System.out.println(); 
          System.out.println(response.getBody()); 
  
  

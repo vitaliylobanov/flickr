@@ -18,7 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class renaming {
+public class getNewTitle {
 	public static void main(String[] args) {
 		WebDriver driver;
 		String baseUrl;
@@ -73,16 +73,14 @@ public class renaming {
 		driver.quit(); 	
 		System.out.println(airline+ " | "+model + " | "+ title +" "+ photoId);
 		String id = String.valueOf(photoId);
-		airline = airline.replace(' ', '+');
-		model = model.replace(' ', '+');
-		String newTitle = airline+ "+%7C+"+model+"+%7C+"+title;
-		String updateMetaUrl = APIprop.updateMeta.replaceFirst("PHOTO", id).replaceFirst("TITLE", newTitle);
-		System.out.println(updateMetaUrl);
+//		airline = airline.replace(' ', '+');
+//		model = model.replace(' ', '+');
+		String newTitle = airline+ " | "+model+" | "+title;
 		
-		Invocation.Builder invocationBuilder1 = client.target(updateMetaUrl)
-				.request(MediaType.APPLICATION_JSON);
-		Response response1 = invocationBuilder1.put(Entity.json(""));
-		System.out.println(response1);
+//		String updateMetaUrl = APIprop.updateMeta.replaceFirst("PHOTO", id).replaceFirst("TITLE", newTitle);
+		System.out.println(newTitle);
+		
+
 		
 	}
 	

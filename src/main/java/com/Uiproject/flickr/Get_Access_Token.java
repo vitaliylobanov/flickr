@@ -2,11 +2,7 @@ package com.Uiproject.flickr;
 
  
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.github.scribejava.core.builder.ServiceBuilder; 
 import com.github.scribejava.apis.FlickrApi; 
@@ -47,7 +43,7 @@ public class Get_Access_Token {
  
          System.out.println("Now go and authorize ScribeJava here:"); 
          String authorizationUrl = service.getAuthorizationUrl(requestToken); 
-         System.out.println(authorizationUrl + "&perms=write"); 
+         System.out.println(authorizationUrl + permsWrite); 
          System.out.println("And paste the verifier here");
         
 //         WebDriver driver;
@@ -80,15 +76,17 @@ public class Get_Access_Token {
          System.out.println("(if your curious it looks like this: " + accessToken + " )"); 
          System.out.println(); 
  
-        
+         getNewTitle.getMetaData();
+         System.out.println(getNewTitle.newTitle + " MOYAAAAAA"); 
+         System.out.println(getNewTitle.newPhotoId + " MOYAAAAAA");
          
  
          // Now let's go and ask for a protected resource!  
          System.out.println("Now we're going to access a protected resource..."); 
          OAuthRequest request = new OAuthRequest(Verb.POST, PROTECTED_RESOURCE_URL, service); 
          request.addQuerystringParameter("method", "flickr.photos.setMeta");
-         request.addQuerystringParameter("photo_id", "23817785921");
-         request.addQuerystringParameter("title", "N644AS");
+         request.addQuerystringParameter("photo_id", getNewTitle.newPhotoId);
+         request.addQuerystringParameter("title", getNewTitle.newTitle);
          service.signRequest(accessToken, request); 
          Response response = request.send(); 
          System.out.println("Got it! Lets see what we found..."); 

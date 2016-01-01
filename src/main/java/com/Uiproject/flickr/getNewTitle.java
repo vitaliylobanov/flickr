@@ -19,7 +19,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class getNewTitle {
-	public static void main(String[] args) {
+   public static String newTitle = null;
+   public static String newPhotoId = null;
+   
+   public static void getMetaData () {
 		WebDriver driver;
 		String baseUrl;
 		Client client;
@@ -71,14 +74,14 @@ public class getNewTitle {
 			System.out.println(model);
 		}
 		driver.quit(); 	
-		System.out.println(airline+ " | "+model + " | "+ title +" "+ photoId);
-		String id = String.valueOf(photoId);
+//		System.out.println(airline+ " | "+model + " | "+ title +" "+ photoId);
+//		String id = String.valueOf(photoId);
 //		airline = airline.replace(' ', '+');
 //		model = model.replace(' ', '+');
-		String newTitle = airline+ " | "+model+" | "+title;
-		
+		newTitle = airline+ " | "+model+" | "+title;
+		newPhotoId = Long.toString(photoId);
 //		String updateMetaUrl = APIprop.updateMeta.replaceFirst("PHOTO", id).replaceFirst("TITLE", newTitle);
-		System.out.println(newTitle);
+//		System.out.println(newTitle);
 		
 
 		

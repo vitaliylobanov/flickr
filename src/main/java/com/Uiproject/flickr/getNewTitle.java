@@ -18,11 +18,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+
 public class getNewTitle {
    public static String newTitle = null;
    public static String newPhotoId = null;
    
    public static void getMetaData () {
+      
+      int num = rename.count;
+      final String str_num = Integer.toString(num);
+      
+      String thermostatStateURL = APIprop.flickrurl
+            .replaceFirst("PHOTOCOUNT", str_num);
+      
 		WebDriver driver;
 		String baseUrl;
 		Client client;

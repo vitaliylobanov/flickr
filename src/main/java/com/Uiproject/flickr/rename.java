@@ -13,11 +13,12 @@ import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.model.Verifier; 
 import com.github.scribejava.core.oauth.OAuthService; 
 
-public class Get_Access_Token { 
+public class rename { 
 
  
     private static final String PROTECTED_RESOURCE_URL = "https://api.flickr.com/services/rest/"; 
  
+    public static int count = 1;
  
     public static void main(String[] args) { 
         // Replace these with your own api key and secret 
@@ -76,6 +77,7 @@ public class Get_Access_Token {
          System.out.println("(if your curious it looks like this: " + accessToken + " )"); 
          System.out.println(); 
  
+         do{
          getNewTitle.getMetaData();
          System.out.println(getNewTitle.newTitle + " MOYAAAAAA"); 
          System.out.println(getNewTitle.newPhotoId + " MOYAAAAAA");
@@ -92,9 +94,12 @@ public class Get_Access_Token {
          System.out.println("Got it! Lets see what we found..."); 
          System.out.println(); 
          System.out.println(response.getBody()); 
- 
- 
-         System.out.println(); 
-         System.out.println("Thats it man! Go and build something awesome with ScribeJava! :)"); 
-     } 
+// 
+// 
+//         System.out.println(); 
+//         System.out.println("Thats it man! Go and build something awesome with ScribeJava! :)");
+         count ++;
+         }
+         while (count < 3);
+         }      
  } 

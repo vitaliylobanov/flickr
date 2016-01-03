@@ -28,7 +28,7 @@ public class getNewTitle {
       int num = rename.count;
       final String str_num = Integer.toString(num);
       
-      String thermostatStateURL = APIprop.flickrurl
+      String flickURLCount = APIprop.flickrurl
             .replaceFirst("PHOTOCOUNT", str_num);
       
 		WebDriver driver;
@@ -39,8 +39,8 @@ public class getNewTitle {
 		String airline = null;
 		String model = null;
 		client = ClientBuilder.newClient();
-		String FlickrUrl = APIprop.flickrurl;
-		Invocation.Builder invocationBuilder = client.target(FlickrUrl)
+		//String FlickrUrl = APIprop.flickrurl;
+		Invocation.Builder invocationBuilder = client.target(flickURLCount)
 				.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.get();
 		String content = response.readEntity(String.class);
@@ -54,7 +54,7 @@ public class getNewTitle {
 
 		driver = new FirefoxDriver();
 		baseUrl = "http://www.airliners.net";
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		driver.get(baseUrl + "/");
 		driver.findElement(By.id("q")).click();

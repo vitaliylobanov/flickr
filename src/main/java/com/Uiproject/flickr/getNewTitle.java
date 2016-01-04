@@ -13,8 +13,10 @@ import javax.ws.rs.core.Response;
 import org.json.JSONObject;
 import org.json.XML;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -52,7 +54,8 @@ public class getNewTitle {
 		title = jsonresponse.getString("title");
 		photoId = jsonresponse.getLong("id");
 
-		driver = new FirefoxDriver();
+		System.setProperty("webdriver.chrome.driver", "C:/Users/Vitaliy/Dropbox/automation/chromedriver.exe");
+		driver = new ChromeDriver();
 		baseUrl = "http://www.airliners.net";
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
@@ -62,10 +65,22 @@ public class getNewTitle {
 		driver.findElement(By.id("q")).sendKeys(title);
 		driver.findElement(By.name("submit")).click();
 
+		try
+		{
 		new Select(driver.findElement(By.name("sort_order")))
 				.selectByVisibleText("Latest Additions First");
+		}
+		catch(NoSuchElementException e)
+		{
+		}
+		try{
 		driver.findElement(By.cssSelector("option[value=\"photo_id desc\"]"))
 				.click();
+		}
+		catch (NoSuchElementException e)
+		{
+		   
+		}
 		List<WebElement> resultList = driver
 				.findElements(By
 						.xpath("//div[@id='content']/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[1]"));

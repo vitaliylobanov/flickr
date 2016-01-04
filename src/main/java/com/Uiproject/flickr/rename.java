@@ -25,7 +25,6 @@ public class rename {
          String apiKey = "86d9143b3942339fba26947499608870"; 
          String apiSecret = "75ed9c6d7095f621"; 
          String permsWrite = "&perms=write";
-         String verificationCode;
          OAuthService service = new ServiceBuilder().provider(FlickrApi.class).apiKey(apiKey).apiSecret(apiSecret). 
                  build(); 
          Scanner in = new Scanner(System.in); 
@@ -82,7 +81,12 @@ public class rename {
          System.out.println(getNewTitle.newTitle + " MOYAAAAAA"); 
          System.out.println(getNewTitle.newPhotoId + " MOYAAAAAA");
          
+         System.out.println("do you wnat to update this? yes/no");
+         Scanner keyboard = new Scanner(System.in);
+         String doUpdated = keyboard.nextLine();
  
+         if(doUpdated.equalsIgnoreCase("yes"))
+         {
          // Now let's go and ask for a protected resource!  
          System.out.println("Now we're going to access a protected resource..."); 
          OAuthRequest request = new OAuthRequest(Verb.POST, PROTECTED_RESOURCE_URL, service); 
@@ -100,6 +104,11 @@ public class rename {
 //         System.out.println("Thats it man! Go and build something awesome with ScribeJava! :)");
          count ++;
          }
-         while (count < 3);
+         else {
+            count ++;
+         }
+         
+         }
+         while (count < 5);
          }      
  } 

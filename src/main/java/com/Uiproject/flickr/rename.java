@@ -18,7 +18,8 @@ public class rename {
  
     private static final String PROTECTED_RESOURCE_URL = "https://api.flickr.com/services/rest/"; 
  
-    public static int count = 1;
+    public static int count = 0;
+    public static int runCount = 0;
  
     public static void main(String[] args) { 
         // Replace these with your own api key and secret 
@@ -34,6 +35,16 @@ public class rename {
          System.out.println(); 
  
  
+         System.out.println("What is the first photo we want to start?");
+         String runphotoS = in.nextLine();
+         count = Integer.parseInt(runphotoS);
+         
+         System.out.println("how many photos would you like to update?");
+         String runS = in.nextLine();
+         runCount = Integer.parseInt(runS);
+         runCount = runCount + count;
+         System.out.println(runCount);
+         
          // Obtain the Request Token 
          System.out.println("Fetching the Request Token..."); 
          Token requestToken = service.getRequestToken(); 
@@ -82,8 +93,8 @@ public class rename {
          System.out.println(getNewTitle.newPhotoId + " MOYAAAAAA");
          
          System.out.println("do you wnat to update this? yes/no");
-         Scanner keyboard = new Scanner(System.in);
-         String doUpdated = keyboard.nextLine();
+//         Scanner keyboard = new Scanner(System.in);
+         String doUpdated = in.nextLine();
  
          if(doUpdated.equalsIgnoreCase("yes"))
          {
@@ -109,6 +120,6 @@ public class rename {
          }
          
          }
-         while (count < 5);
+         while (count < runCount);
          }      
  } 

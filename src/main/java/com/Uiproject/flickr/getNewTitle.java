@@ -78,8 +78,7 @@ public class getNewTitle {
 				.click();
 		}
 		catch (NoSuchElementException e)
-		{
-		   
+		{		   
 		}
 		List<WebElement> resultList = driver
 				.findElements(By

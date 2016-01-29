@@ -29,4 +29,5 @@ public class separator
         System.out.println(strArray[i]);
        }
    }
+   
 }

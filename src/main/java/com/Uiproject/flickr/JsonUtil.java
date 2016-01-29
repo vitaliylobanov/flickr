@@ -16,8 +16,6 @@ import org.slf4j.LoggerFactory;
 * This is an utility class for manipulating JSON.
 * The class supports both Java parsing and Java mapping from JSON.
 * 
-* @author $Author: vprasannaa $
-* @version $Rev: 30605 $ $Date: 2014-05-19 05:32:56 -0700 (Mon, 19 May 2014) $
 */
 public final class JsonUtil {
 

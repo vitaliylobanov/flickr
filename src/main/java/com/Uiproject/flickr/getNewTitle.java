@@ -18,6 +18,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
 
 
@@ -54,8 +57,12 @@ public class getNewTitle {
 		title = jsonresponse.getString("title");
 		photoId = jsonresponse.getLong("id");
 
-		System.setProperty("webdriver.chrome.driver", "C:/Users/Vitaliy/Dropbox/automation/chromedriver.exe");
-		driver = new ChromeDriver();
+		DesiredCapabilities caps = new DesiredCapabilities();
+		caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+		                "C:/Users/Vitaliy/Desktop/phantom/phantomjs-2.1.1-windows/bin/phantomjs.exe");                  
+		driver = new PhantomJSDriver(caps);
+//		System.setProperty("webdriver.chrome.driver", "C:/Users/Vitaliy/Dropbox/automation/chromedriver.exe");
+//		driver = new ChromeDriver();
 		baseUrl = "http://www.airliners.net";
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 

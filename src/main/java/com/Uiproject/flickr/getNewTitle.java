@@ -27,6 +27,11 @@ import org.openqa.selenium.support.ui.Select;
 public class getNewTitle {
    public static String newTitle = null;
    public static String newPhotoId = null;
+   private static String sortByXpath = "//select[contains(@name, 'photo_search[sortBy]')]";
+   private static String chooseSortXpath = "//select[contains(@id, 'photo_search_sortBy')]//option[contains(text(), 'Date Added')]";
+   private static String airlineByXpath = "//li[1]//div[contains(@class, 'card-copy-row card-copy-row-airline')]//a[contains(@href,'')]";
+   private static String aircraftByXpath = "//li[1]//div[contains(@class, 'card-copy-row card-copy-row-aircraft')]//a[contains(@href,'')]";
+   
    
    public static void getMetaData () {
       
@@ -66,54 +71,24 @@ public class getNewTitle {
 		baseUrl = "http://www.airliners.net";
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-		driver.get(baseUrl + "/");
-		driver.findElement(By.id("q")).click();
-		driver.findElement(By.id("q")).clear();
-		driver.findElement(By.id("q")).sendKeys(title);
-		driver.findElement(By.name("submit")).click();
-
-		try
-		{
-		new Select(driver.findElement(By.name("sort_order")))
-				.selectByVisibleText("Latest Additions First");
-		}
-		catch(NoSuchElementException e)
-		{
-		}
-		try{
-		driver.findElement(By.cssSelector("option[value=\"photo_id desc\"]"))
-				.click();
-		}
-		catch (NoSuchElementException e)
-		{		   
-		}
-		List<WebElement> resultList = driver
-				.findElements(By
-						.xpath("//div[@id='content']/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[1]"));
-		for (WebElement resultItem : resultList) {
-			airline = resultItem.getText();
-			System.out.println(airline);
-
-		}
-		List<WebElement> resultList1 = driver
-				.findElements(By
-						.xpath("//div[@id='content']/div/table[2]/tbody/tr[2]/td[1]/div[1]/table/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/table/tbody/tr/td/font/a[2]"));
-		for (WebElement resultItem1 : resultList1) {
-			model = resultItem1.getText();
-			System.out.println(model);
-		}
+		driver.get(baseUrl + "/search?keywords=" + title);
+		
+		 WebElement sortBy = driver.findElement(By.xpath(sortByXpath));
+		 sortBy.click();
+		 
+		 WebElement chooseSort = driver.findElement(By.xpath(chooseSortXpath));
+		 chooseSort.click();
+		 
+		 WebElement airlineName = driver.findElement(By.xpath(airlineByXpath));
+		 airline = airlineName.getText();
+		       
+       WebElement modelName = driver.findElement(By.xpath(aircraftByXpath));
+       model = modelName.getText();
+		 
 		driver.quit(); 	
-//		System.out.println(airline+ " | "+model + " | "+ title +" "+ photoId);
-//		String id = String.valueOf(photoId);
-//		airline = airline.replace(' ', '+');
-//		model = model.replace(' ', '+');
+
 		newTitle = airline+ " | "+model+" | "+title;
 		newPhotoId = Long.toString(photoId);
-//		String updateMetaUrl = APIprop.updateMeta.replaceFirst("PHOTO", id).replaceFirst("TITLE", newTitle);
-//		System.out.println(newTitle);
-		
-
-		
 	}
 	
     

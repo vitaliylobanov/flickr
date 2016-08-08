@@ -29,8 +29,8 @@ public class getNewTitle {
    public static String newPhotoId = null;
    private static String sortByXpath = "//select[contains(@name, 'photo_search[sortBy]')]";
    private static String chooseSortXpath = "//select[contains(@id, 'photo_search_sortBy')]//option[contains(text(), 'Date Added')]";
-   private static String airlineByXpath = "//li[1]//div[contains(@class, 'card-copy-row card-copy-row-airline')]//a[contains(@href,'')]";
-   private static String aircraftByXpath = "//li[1]//div[contains(@class, 'card-copy-row card-copy-row-aircraft')]//a[contains(@href,'')]";
+   private static String airlineByXpath = "//a[contains(@href,'search?airline')]";
+   private static String aircraftByXpath = "//a[contains(@href,'aircraftGeneric')]";
    
    
    public static void getMetaData () {

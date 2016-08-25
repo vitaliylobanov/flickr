@@ -29,8 +29,8 @@ public class getNewTitle {
    public static String newPhotoId = null;
    private static String sortByXpath = "//select[contains(@name, 'photo_search[sortBy]')]";
    private static String chooseSortXpath = "//select[contains(@id, 'photo_search_sortBy')]//option[contains(text(), 'Date Added')]";
-   private static String airlineByXpath = "//a[contains(@href,'search?airline')]";
-   private static String aircraftByXpath = "//a[contains(@href,'aircraftGeneric')]";
+   private static String airlineByXpath = "//div[contains(@class,'even')]//a[contains(@href,'search?airline')]";
+   private static String aircraftByXpath = "//div[contains(@class,'even')]//a[contains(@href,'search?aircraft')]";
    
    
    public static void getMetaData () {
@@ -71,13 +71,13 @@ public class getNewTitle {
 		baseUrl = "http://www.airliners.net";
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-		driver.get(baseUrl + "/search?keywords=" + title);
+		driver.get(baseUrl + "/search?keywords=" + title + "&sortBy=dateAccepted&sortOrder=desc");
 		
-		 WebElement sortBy = driver.findElement(By.xpath(sortByXpath));
-		 sortBy.click();
-		 
-		 WebElement chooseSort = driver.findElement(By.xpath(chooseSortXpath));
-		 chooseSort.click();
+//		 WebElement sortBy = driver.findElement(By.xpath(sortByXpath));
+//		 sortBy.click();
+//		 
+//		 WebElement chooseSort = driver.findElement(By.xpath(chooseSortXpath));
+//		 chooseSort.click();
 		 
 		 WebElement airlineName = driver.findElement(By.xpath(airlineByXpath));
 		 airline = airlineName.getText();
